@@ -2,6 +2,11 @@ pipeline {
     agent any
     
     stages {
+        stage('Init'){
+            steps {
+                sh 'docker exec -u root -it jenkins bash -c "apt-get update && apt-get install -y nodejs npm"'
+            }
+        }
         stage('Build'){
             agent {
                 docker {
@@ -14,9 +19,9 @@ pipeline {
                     ls -la
                     node --version
                     npm --version
-                    npm ci
+                    // npm ci
                     npm run build
-                    ls -la
+                    // ls -la
                 '''
             }
         }
