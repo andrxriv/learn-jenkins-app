@@ -2,28 +2,23 @@ pipeline {
     agent any
     
     stages {
-        // stage('Init'){
+        // stage('Build'){
+        //     agent {
+        //         docker {
+        //             image 'node:18-alpine'
+        //             reuseNode true
+        //         }
+        //     }
         //     steps {
-        //         sh 'docker exec -u root -it jenkins bash -c "apt-get update && apt-get install -y nodejs npm"'
+        //         sh '''
+        //             ls -la
+        //             node --version
+        //             npm --version
+        //             npm ci
+        //             npm run build
+        //         '''
         //     }
         // }
-        stage('Build'){
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm ci
-                    npm run build
-                '''
-            }
-        }
 
         stage('Test') {
             agent {
